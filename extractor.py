@@ -7,7 +7,7 @@ from selenium.webdriver.chrome.options import Options
 from time import time, sleep
 from random import randint
 
-TOKEN = '7808150414:AAFNXvEsyoO5uz19FvHYbYScl4bOihuFbo0'
+TOKEN = '7732478555:AAFYDhz2cBnTosDSGGBiy6Fx-bVr8NloXgM'
 bot = telebot.TeleBot(TOKEN)
 
 user_data = {}
@@ -184,7 +184,7 @@ def two_step_selenium(user_data, chat_id, message):
                 
     with open(f'mobile_number{chat_id}.txt', 'wb') as f:
         for item in user_data[chat_id]["contact"]:
-            f.write(item + "\n")
+            f.write((item + "\n").encode("utf-8"))
             
     with open(f'mobile_number{chat_id}.txt', 'rb') as file:
         bot.send_document(chat_id, file)
