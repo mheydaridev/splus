@@ -61,6 +61,13 @@ def one_step_selenium(user_data, chat_id, message):
         "profile.default_content_setting_values.notifications": 2,
     }
     chrome_options = Options()
+
+    chrome_options.add_argument("--headless")  # اجرای بدون رابط گرافیکی
+    chrome_options.add_argument("--no-sandbox")  # مورد نیاز برای برخی از سرورها
+    chrome_options.add_argument("--disable-dev-shm-usage")  # جلوگیری از مشکلات فضای اشتراکی
+    chrome_options.add_argument("--disable-gpu")  # غیرفعال کردن GPU (در محیط‌های سرور)
+    chrome_options.add_argument("--remote-debugging-port=9222")  # فعال کردن دیباگ پورت
+
     chrome_options.add_experimental_option("prefs", prefs)
     user_data[chat_id]["driver"] = webdriver.Chrome(service=Service("./chromedriver"), options=chrome_options)
     user_data[chat_id]["driver"].maximize_window()
