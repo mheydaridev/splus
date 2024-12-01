@@ -9,7 +9,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from time import time, sleep
 
-TOKEN = '8183323090:AAGXxEscEHLlm5ubinSqUeB4MeUUdZG-j3Q'
+TOKEN = '7872666597:AAEc-x2dev_2k297XZo1rFTdsXbwLmhEYqc'
 bot = telebot.TeleBot(TOKEN)
 
 user_data = {}
