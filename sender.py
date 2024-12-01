@@ -9,7 +9,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from time import time, sleep
 
-TOKEN = '7732478555:AAFYDhz2cBnTosDSGGBiy6Fx-bVr8NloXgM'
+TOKEN = '7789081253:AAE8yBJpxvUA82_fWW-u038bxbbGFXLwmq0'
 bot = telebot.TeleBot(TOKEN)
 
 user_data = {}
@@ -96,7 +96,7 @@ def one_step_selenium(user_data, chat_id, message):
     chrome_options.add_argument("--disable-dev-shm-usage")  # جلوگیری از مشکلات فضای اشتراکی
     chrome_options.add_argument("--disable-gpu")  # غیرفعال کردن GPU (در محیط‌های سرور)
     chrome_options.add_argument("--remote-debugging-port=9222")  # فعال کردن دیباگ پورت
-
+    
     chrome_options.add_experimental_option("prefs", prefs)
     user_data[chat_id]["driver"] = webdriver.Chrome(service=Service("./chromedriver"), options=chrome_options)
     user_data[chat_id]["driver"].maximize_window()
