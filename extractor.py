@@ -7,7 +7,7 @@ from selenium.webdriver.chrome.options import Options
 from time import time, sleep
 from random import randint
 
-TOKEN = '7732478555:AAFYDhz2cBnTosDSGGBiy6Fx-bVr8NloXgM'
+TOKEN = '7808150414:AAFNXvEsyoO5uz19FvHYbYScl4bOihuFbo0'
 bot = telebot.TeleBot(TOKEN)
 
 user_data = {}
@@ -91,8 +91,7 @@ def one_step_selenium(user_data, chat_id, message):
         except:
             sleep(1.25)
 
-    time_start_check_new_contact = time()
-    while time() - time_start_check_new_contact < 20:
+    while True:
         try:
             elem = user_data[chat_id]["driver"].find_element(By.XPATH, '//*[@id="auth-code-form"]/div/div[3]/div')
             elem.click()
@@ -121,16 +120,16 @@ def two_step_selenium(user_data, chat_id, message):
             break
         except:
             sleep(1.25)
-    
-    while True:
-        try:
-            elem = user_data[chat_id]["driver"].find_element(By.XPATH, '//*[@id="LeftColumn-main"]/div[4]/div[4]')
-            elem.click()
-            break
-        except:
-            sleep(1.25)
             
     while len(user_data[chat_id]['contact']) < user_data[chat_id]["count"]:
+        while True: 
+            try:
+                elem = user_data[chat_id]["driver"].find_element(By.XPATH, '//*[@id="LeftColumn-main"]/div[4]/div[4]')
+                elem.click()
+                break
+            except:
+                sleep(1.25)
+
         while True:
             try:
                 elem = user_data[chat_id]["driver"].find_element(By.XPATH, '//button[@aria-label="مخاطب جدید"]')
