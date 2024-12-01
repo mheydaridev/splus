@@ -7,7 +7,7 @@ from selenium.webdriver.chrome.options import Options
 from time import time, sleep
 from random import randint
 
-TOKEN = '7615046486:AAGVMvF0-_ssc9ezz1Im1lxwF7kOE04l-Bg'
+TOKEN = '7732478555:AAFYDhz2cBnTosDSGGBiy6Fx-bVr8NloXgM'
 bot = telebot.TeleBot(TOKEN)
 
 user_data = {}
@@ -73,7 +73,7 @@ def one_step_selenium(user_data, chat_id, message):
             elem.click()
             break
         except:
-            sleep(1)
+            sleep(1.25)
 
     while True:
         try:
@@ -81,7 +81,7 @@ def one_step_selenium(user_data, chat_id, message):
             elem.send_keys(user_data[chat_id]["phone"][1:])
             break
         except:
-            sleep(1)
+            sleep(1.25)
 
     while True:
         try:
@@ -89,16 +89,16 @@ def one_step_selenium(user_data, chat_id, message):
             elem.click()
             break
         except:
-            sleep(1)
+            sleep(1.25)
 
     time_start_check_new_contact = time()
-    while time() - time_start_check_new_contact < 4:
+    while time() - time_start_check_new_contact < 20:
         try:
             elem = user_data[chat_id]["driver"].find_element(By.XPATH, '//*[@id="auth-code-form"]/div/div[3]/div')
             elem.click()
             break
         except:
-            sleep(1)
+            sleep(1.25)
 
 def two_step_selenium(user_data, chat_id, message):
     user_data[chat_id]["contact"] = []
@@ -120,7 +120,7 @@ def two_step_selenium(user_data, chat_id, message):
             elem.send_keys(user_data[chat_id]["code"])
             break
         except:
-            sleep(1)
+            sleep(1.25)
     
     while True:
         try:
@@ -128,7 +128,7 @@ def two_step_selenium(user_data, chat_id, message):
             elem.click()
             break
         except:
-            sleep(1)
+            sleep(1.25)
             
     while len(user_data[chat_id]['contact']) < user_data[chat_id]["count"]:
         while True:
@@ -137,7 +137,7 @@ def two_step_selenium(user_data, chat_id, message):
                 elem.click()
                 break
             except:
-                sleep(1)
+                sleep(1.25)
 
         while True:
             try:
@@ -146,7 +146,7 @@ def two_step_selenium(user_data, chat_id, message):
                 elem.send_keys(moblie_contact[1:])
                 break
             except:
-                sleep(1)
+                sleep(1.25)
 
         while True:
             try:
@@ -154,7 +154,7 @@ def two_step_selenium(user_data, chat_id, message):
                 elem.send_keys(moblie_contact)
                 break
             except:
-                sleep(1)
+                sleep(1.25)
                 
         while True:
             try:
@@ -162,17 +162,17 @@ def two_step_selenium(user_data, chat_id, message):
                 elem.click()
                 break
             except:
-                sleep(1)
+                sleep(1.25)
         
         time_start_check_new_contact = time()
-        while time() - time_start_check_new_contact < 4:
+        while time() - time_start_check_new_contact < 20:
             try:
                 user_data[chat_id]["driver"].find_element(By.XPATH, "//*[contains(text(), 'اول')]")
                 user_data[chat_id]["driver"].find_element(By.XPATH, f"//*[contains(text(), '{moblie_contact}')]")
                 user_data[chat_id]["contact"].append(moblie_contact)
                 break
             except:
-                sleep(1)
+                sleep(1.25)
                 
     user_data[chat_id]["driver"].close()
                 
