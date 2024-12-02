@@ -194,8 +194,4 @@ def two_step_selenium(user_data, chat_id, message):
 
 
 
-while True:
-    try: 
-        bot.polling()
-    except:
-        sleep(2)
+bot.polling()
