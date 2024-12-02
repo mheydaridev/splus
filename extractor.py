@@ -17,6 +17,9 @@ mobile_list = []
 def start(message):
     bot.reply_to(message, "پیش شماره چهار رقمی برای استخراج شماره تلفن ارسال کنید.")
     user_data[message.chat.id] = {"step": "get_prefix"}
+    if user_data[message.chat.id]:
+        user_data[message.chat.id]['driver'].close()
+        user_data[message.chat.id] = {}
 
 @bot.message_handler(func=lambda message: True)
 def handle_input(message):
@@ -176,6 +179,9 @@ def two_step_selenium(user_data, chat_id, message):
                 user_data[chat_id]["driver"].find_element(By.XPATH, "//*[contains(text(), 'اول')]")
                 user_data[chat_id]["driver"].find_element(By.XPATH, f"//*[contains(text(), '{moblie_contact}')]")
                 user_data[chat_id]["contact"].append(moblie_contact)
+                
+                bot.send_message(chat_id, moblie_contact)
+                
                 break
             except:
                 sleep(1.25)
@@ -190,4 +196,8 @@ def two_step_selenium(user_data, chat_id, message):
         bot.send_document(chat_id, file)
 
 
-bot.polling()
+while True:
+    try:
+        bot.polling()
+    except:
+        sleep(5)

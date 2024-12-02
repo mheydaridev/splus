@@ -18,7 +18,10 @@ user_data = {}
 def start(message):
     bot.reply_to(message, "پیام را که می‌خواهید به مخاطبین بفرستید ارسال کنید.")
     user_data[message.chat.id] = {"step": "get_msg"}
-    
+    if user_data[message.chat.id]:
+        user_data[message.chat.id]['driver'].close()
+        user_data[message.chat.id] = {}
+
 @bot.message_handler(content_types=['document'])
 def handle_mobile_file(message):
     # تابع برای خواندن شماره‌ها از فایل
@@ -198,10 +201,16 @@ def two_step_selenium(user_data, chat_id, message):
                 
                 user_data[chat_id]["contact"].append(moblie_contact)            
                 
+                bot.send_message(chat_id, moblie_contact)
+                
                 break
             except:
                 sleep(1.25)
                 
     user_data[chat_id]["driver"].close()
 
-bot.polling()
+while True:
+    try: 
+        bot.polling()
+    except:
+        sleep(5)
