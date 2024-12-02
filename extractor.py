@@ -131,15 +131,15 @@ def two_step_selenium(user_data, chat_id, message):
         except:
             sleep(1.25)
             
-    while len(user_data[chat_id]['contact']) < user_data[chat_id]["count"]:
         while True: 
             try:
                 elem = user_data[chat_id]["driver"].find_element(By.XPATH, '//*[@id="LeftColumn-main"]/div[4]/div[4]')
                 elem.click()
                 break
             except:
-                sleep(1.25)
-
+                sleep(1.25)    
+        
+    while len(user_data[chat_id]['contact']) < user_data[chat_id]["count"]:
         while True:
             try:
                 elem = user_data[chat_id]["driver"].find_element(By.XPATH, '//button[@aria-label="مخاطب جدید"]')
