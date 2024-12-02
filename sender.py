@@ -192,6 +192,8 @@ def two_step_selenium(user_data, chat_id, message):
                 pyperclip.copy(user_data[chat_id]["msg"])
                 user_data[chat_id]["action"].key_down(Keys.CONTROL).send_keys("v").key_up(Keys.CONTROL).perform()
                 
+                sleep(1)
+                
                 elem = user_data[chat_id]["driver"].find_element(By.XPATH, '//button[@aria-label="ارسال پیام"]')
                 elem.click()
                 
