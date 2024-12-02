@@ -17,9 +17,6 @@ mobile_list = []
 def start(message):
     bot.reply_to(message, "پیش شماره چهار رقمی برای استخراج شماره تلفن ارسال کنید.")
     user_data[message.chat.id] = {"step": "get_prefix"}
-    if user_data[message.chat.id]:
-        user_data[message.chat.id]['driver'].close()
-        user_data[message.chat.id] = {}
 
 @bot.message_handler(func=lambda message: True)
 def handle_input(message):
@@ -83,7 +80,7 @@ def one_step_selenium(user_data, chat_id, message):
             elem.click()
             break
         except:
-            sleep(1.25)
+            sleep(1)
 
     while True:
         try:
@@ -91,7 +88,7 @@ def one_step_selenium(user_data, chat_id, message):
             elem.send_keys(user_data[chat_id]["phone"][1:])
             break
         except:
-            sleep(1.25)
+            sleep(1)
 
     while True:
         try:
@@ -99,7 +96,7 @@ def one_step_selenium(user_data, chat_id, message):
             elem.click()
             break
         except:
-            sleep(1.25)
+            sleep(1)
 
     while True:
         try:
@@ -107,7 +104,7 @@ def one_step_selenium(user_data, chat_id, message):
             elem.click()
             break
         except:
-            sleep(1.25)
+            sleep(1)
 
 def two_step_selenium(user_data, chat_id, message):
     user_data[chat_id]["contact"] = []
@@ -129,15 +126,15 @@ def two_step_selenium(user_data, chat_id, message):
             elem.send_keys(user_data[chat_id]["code"])
             break
         except:
-            sleep(1.25)
+            sleep(1)
             
         while True: 
             try:
-                elem = user_data[chat_id]["driver"].find_element(By.XPATH, '//*[@id="LeftColumn-main"]/div[4]/div[4]')
+                elem = user_data[chat_id]["driver"].find_element(By.XPATH, '//*[@id="LeftColumn-main"]/div[4]/div[4]/i')
                 elem.click()
                 break
             except:
-                sleep(1.25)    
+                sleep(1)    
         
     while len(user_data[chat_id]['contact']) < user_data[chat_id]["count"]:
         while True:
@@ -146,7 +143,7 @@ def two_step_selenium(user_data, chat_id, message):
                 elem.click()
                 break
             except:
-                sleep(1.25)
+                sleep(1)
 
         while True:
             try:
@@ -155,7 +152,7 @@ def two_step_selenium(user_data, chat_id, message):
                 elem.send_keys(moblie_contact[1:])
                 break
             except:
-                sleep(1.25)
+                sleep(1)
 
         while True:
             try:
@@ -163,7 +160,7 @@ def two_step_selenium(user_data, chat_id, message):
                 elem.send_keys(moblie_contact)
                 break
             except:
-                sleep(1.25)
+                sleep(1)
                 
         while True:
             try:
@@ -171,10 +168,10 @@ def two_step_selenium(user_data, chat_id, message):
                 elem.click()
                 break
             except:
-                sleep(1.25)
+                sleep(1)
         
         time_start_check_new_contact = time()
-        while time() - time_start_check_new_contact < 20:
+        while time() - time_start_check_new_contact < 10:
             try:
                 user_data[chat_id]["driver"].find_element(By.XPATH, "//*[contains(text(), 'اول')]")
                 user_data[chat_id]["driver"].find_element(By.XPATH, f"//*[contains(text(), '{moblie_contact}')]")
@@ -184,7 +181,7 @@ def two_step_selenium(user_data, chat_id, message):
                 
                 break
             except:
-                sleep(1.25)
+                sleep(1)
                 
     user_data[chat_id]["driver"].close()
                 
@@ -196,8 +193,9 @@ def two_step_selenium(user_data, chat_id, message):
         bot.send_document(chat_id, file)
 
 
+
 while True:
-    try:
+    try: 
         bot.polling()
     except:
-        sleep(5)
+        sleep(2)
