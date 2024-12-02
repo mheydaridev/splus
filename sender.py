@@ -127,10 +127,9 @@ def one_step_selenium(user_data, chat_id, message):
         except:
             sleep(1)
 
-    time_start_check_new_contact = time()
-    while time() - time_start_check_new_contact < 20:
+    while True:
         try:
-            elem = user_data[chat_id]["driver"].find_element(By.XPATH, '//*[@id="LeftColumn-main"]/div[4]/div[4]/i')
+            elem = user_data[chat_id]["driver"].find_element(By.XPATH, '//*[@id="auth-code-form"]/div/div[3]/div')
             elem.click()
             break
         except:

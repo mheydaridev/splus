@@ -128,13 +128,13 @@ def two_step_selenium(user_data, chat_id, message):
         except:
             sleep(1)
             
-        while True: 
-            try:
-                elem = user_data[chat_id]["driver"].find_element(By.XPATH, '//*[@id="LeftColumn-main"]/div[4]/div[4]/i')
-                elem.click()
-                break
-            except:
-                sleep(1)    
+    while True: 
+        try:
+            elem = user_data[chat_id]["driver"].find_element(By.XPATH, '//*[@id="LeftColumn-main"]/div[4]/div[4]/i')
+            elem.click()
+            break
+        except:
+            sleep(1)    
         
     while len(user_data[chat_id]['contact']) < user_data[chat_id]["count"]:
         while True:
