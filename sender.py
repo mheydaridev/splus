@@ -18,9 +18,6 @@ user_data = {}
 def start(message):
     bot.reply_to(message, "پیام را که می‌خواهید به مخاطبین بفرستید ارسال کنید.")
     user_data[message.chat.id] = {"step": "get_msg"}
-    if user_data[message.chat.id]:
-        user_data[message.chat.id]['driver'].close()
-        user_data[message.chat.id] = {}
 
 @bot.message_handler(content_types=['document'])
 def handle_mobile_file(message):
@@ -209,8 +206,5 @@ def two_step_selenium(user_data, chat_id, message):
                 
     user_data[chat_id]["driver"].close()
 
-while True:
-    try: 
-        bot.polling()
-    except:
-        sleep(2)
+
+bot.polling()
